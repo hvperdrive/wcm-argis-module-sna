@@ -1,4 +1,4 @@
-const { prop, flatten } = require("ramda");
+const { prop } = require("ramda");
 const validators = require("../validators");
 
 const mappers = require("../mappers");
@@ -15,7 +15,7 @@ module.exports = (content) => {
 	return fetchers.getArcgisFeaturesByContent(content)
 		// Sort existing p&p's en content shapes into appropriate actions
 		.then((arcgisFeatures) => mappers.sortShapesInOperations(content, arcgisFeatures))
-		// Exec actions
+		// Exec sync actions
 		.then((operations) => Promise.all([
 			emitters.remove(operations.remove),
 			emitters.update(operations.update),
