@@ -1,5 +1,3 @@
 const exposedMethod = require("./exposedMethod");
 
-module.exports = {
-	exposedMethod: exposedMethod
-};
+module.exports = {};

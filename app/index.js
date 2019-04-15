@@ -1,12 +1,13 @@
 const setupRoutes = require("./routes");
 const variablesHelper = require("./helpers/variables");
 const hooksController = require("./controllers/hooks");
+const listener = require("./controllers/listener");
 
 module.exports = (app, hooks, moduleInfo) => {
 	// Get variables
 	variablesHelper.reload(moduleInfo)
 		.then((variables) => {
-			// do some stuff that needs the variables first
+			listener.start();
 		});
 
 	// Handle hooks
