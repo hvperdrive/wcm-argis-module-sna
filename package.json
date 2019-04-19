@@ -58,9 +58,9 @@
         "gulp-apidoc": "~0.2.0",
         "gulp-apidoc-swagger": "~0.2.2",
         "gulp-replace": "~0.5.4",
-        "nyc": "^13.3.0",
         "mocha": "~4.0.1",
+        "nyc": "^13.3.0",
         "run-sequence": "~1.2.2",
-        "sinon": "~4.0.2"
+        "sinon": "^4.0.2"
     }
 }

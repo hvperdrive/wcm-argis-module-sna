@@ -21,6 +21,7 @@ describe("Handlers - remove", () => {
 		mockery.registerMock("../../variables", variablesHelperMock({
 			wegenWerkenId: wegenwerkenContentMock.content1.meta.contentType._id
 		}));
+		mockery.registerMock("@wcm/module-helper", { models: { Content: {}}})
 
 		pointQueryNock = nock("https://geoint-a.antwerpen.be")
 			.get("/arcgis/rest/services/A_SNA/SNA_werven_pt_wgs84/FeatureServer/0/query")
@@ -60,6 +61,7 @@ describe("Handlers - remove", () => {
 		const result = await remove(wegenwerkenContentMock.content1);
 
 		expect(result).to.be.an("object");
+
 		expect(result.points)
 			.to.be.an("object")
 			.and.to.be.empty;
