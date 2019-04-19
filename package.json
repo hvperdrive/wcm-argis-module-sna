@@ -45,25 +45,25 @@
             "required": true
           }]
         }, {
-          "group": "Features",
-            "key": "features",
-            "enabled": true,
-            "accordion": true,
-            "variables": [{
-              "label": "Arcgis point layer uri",
-              "description": "Arcgis URI for points",
-              "key": "point",
-              "value": "",
-              "type": "text",
-              "required": true
-            }, {
-              "label": "Arcgis polygon layer uri",
-              "description": "Arcgis URI for polygons",
-              "key": "poly",
-              "value": "",
-              "type": "text",
-              "required": true
-            }]
+          "group": "Arcgis layers",
+          "key": "layers",
+          "enabled": true,
+          "accordion": true,
+          "variables": [{
+            "label": "Arcgis point layer uri",
+            "description": "Arcgis URI for points",
+            "key": "point",
+            "value": "",
+            "type": "text",
+            "required": true
+          }, {
+            "label": "Arcgis polygon layer uri",
+            "description": "Arcgis URI for polygons",
+            "key": "poly",
+            "value": "",
+            "type": "text",
+            "required": true
+          }]
         }]
     },
     "author": "Jeroen Valcke",
