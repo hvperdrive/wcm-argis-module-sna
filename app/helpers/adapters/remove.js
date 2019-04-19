@@ -4,7 +4,7 @@ const { path } = require("ramda");
 const variablesHelper = require("../variables");
 
 module.exports = (type, objectIds) => {
-	const layerUri = path(["variables", "layers", "variables", type])(variablesHelper.get());
+	const layerUri = path(["layers", "variables", type])(variablesHelper.get());
 
 	return request({
 		baseUrl: layerUri,
