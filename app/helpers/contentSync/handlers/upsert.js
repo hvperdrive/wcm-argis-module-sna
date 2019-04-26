@@ -21,5 +21,6 @@ module.exports = (content) => {
 			emitters.update(operations.update),
 			emitters.create(operations.create),
 		]))
-		.then((result) => console.log("SNA-ARCGIS-MODULE: Sync successfull") || result);
+			.then((result) => console.log("SNA-ARCGIS-MODULE: Sync successfull") || result)
+			.catch((error) => console.log(`SNA-ARCGIS-MODULE: Sync error for ${prop("_id", content)}`, error))
 };

@@ -26,7 +26,11 @@ const shapeToFeature = require("./shapeToFeature");
  * @property {Object[]} getArcgisFeaturesByContentResponse.points.remove Point features
  */
 
-const getFId = (feature) => path(["properties", "F_id"])(feature);
+const getContentFId = (feature) => compose(
+	(item) => item.toString(),
+	pathOr(-1, ["attributes", "F_id"])
+)(feature);
+const getArcgisFId = (feature) => path(["properties", "F_id"])(feature);
 
 const sortByCrud = (type, content, features) => {
 	// Map and filter the content shapes to features of a specific type
@@ -38,18 +42,18 @@ const sortByCrud = (type, content, features) => {
 			equals(type.slice(0, -1)), // remove 's' (points => point, polygons => polygon)
 			toLower,
 			pathOr("", ["geometry", "type"])
-		 )(shape)),
+		)(shape)),
 		getShapes
 	)(content);
 
-	const comp = (contentFeature, feature) => getFId(contentFeature) === getFId(feature);
+	const comp = (contentFeature, feature) => getContentFId(contentFeature) === getArcgisFId(feature);
 
 	return {
 		create: differenceWith((contentFeature, feature) => comp(contentFeature, feature))(contentFeatures, features),
 		update: innerJoin((feature, contentFeature) => comp(contentFeature, feature))(features, contentFeatures),
 		remove: differenceWith((feature, contentFeature) => comp(contentFeature, feature))(features, contentFeatures),
-	}
-}
+	};
+};
 
 /**
  * @function sortShapesInOperations
@@ -70,4 +74,4 @@ module.exports = (content, arcgisFeatures) => {
 		update: {},
 		remove: {},
 	});
-}
+};

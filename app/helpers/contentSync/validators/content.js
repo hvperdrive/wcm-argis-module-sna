@@ -1,10 +1,13 @@
-const { path, either } = require("ramda");
+const { pathOr, either, compose } = require("ramda");
 
 const variables = require("../../variables");
 
-const getContentTypeId = (content) => either(
-    path(["meta", "contentType", "_id"]),
-    path(["meta", "contentType"]),
+const getContentTypeId = (content) => compose(
+	(ct) => ct.toString(),
+	either(
+		pathOr("", ["meta", "contentType", "_id"]),
+		pathOr("", ["meta", "contentType"])
+	)
 )(content);
 
 module.exports = (content) => {

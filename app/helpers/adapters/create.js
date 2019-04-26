@@ -18,5 +18,5 @@ module.exports = (type, features) => {
 			Authorization: "Basic SUNBXGV4MDI1Mzg6RGlzdHJpY3QwMg==",
 		},
 		json: true
-	})
-}
+	});
+};
