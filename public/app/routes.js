@@ -3,11 +3,11 @@
 		.config([
 
 			"$stateProvider",
-			"boilerplateConfigProvider",
+			"arcgisSNAConfigProvider",
 
-			function ($stateProvider, boilerplateConfigProvider) {
+			function ($stateProvider, arcgisSNAConfigProvider) {
 
-				var moduleFolder = boilerplateConfigProvider.API.modulePath;
+				var moduleFolder = arcgisSNAConfigProvider.API.modulePath;
 
 				$stateProvider
 
@@ -15,11 +15,6 @@
 						url: "",
 						access: {
 							requiresLogin: true
-						},
-						resolve: {
-							ListData: ["boilerplateFactory", function(boilerplateFactory) {
-								return boilerplateFactory.get({ id: "public" }).$promise;
-							}],
 						},
 						ncyBreadcrumb: {
 							label: "{{breadcrumb}}"

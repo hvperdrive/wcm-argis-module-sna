@@ -6,7 +6,7 @@
 			"$timeout",
 
 			// Factories
-			"arcgisAMFactory",
+			"arcgisSNAFactory",
 
 			// Services
 			"LabelService",
@@ -15,7 +15,7 @@
 			function (
 				$scope,
 				$timeout,
-				arcgisAMFactory,
+				arcgisSNAFactory,
 				LabelService,
 				NotificationService
 			) {
@@ -24,7 +24,8 @@
 
 				$scope.reindexSearch = function() {
 					$scope.reindexing = true;
-					arcgisAMFactory
+
+					arcgisSNAFactory
 						.reindexSearch()
 						.then(function() {
 							NotificationService.showNotification(
