@@ -1,7 +1,5 @@
-"use strict";
-
 (function(angular) {
-	angular.module("wcm-boilerplate_0.0.1")
+	angular.module("wcm-arcgis-sna_0.0.1")
 		.config([
 
 			"$stateProvider",
@@ -13,7 +11,7 @@
 
 				$stateProvider
 
-					.state("pelorus.wcm-boilerplate.index", {
+					.state("pelorus.wcm-arcgis-sna.index", {
 						url: "",
 						access: {
 							requiresLogin: true
@@ -29,35 +27,7 @@
 						views: {
 							"": {
 								templateUrl: moduleFolder + "views/overview.html",
-								controller: "boilerplateOverviewController"
-							}
-						}
-					})
-
-					.state("pelorus.wcm-boilerplate.edit", {
-						url: "/{uuid}",
-						access: {
-							requiresLogin: true
-						},
-						resolve: {
-							InstanceData: ["boilerplateFactory", "$stateParams", function(boilerplateFactory, $stateParams) {
-								if ($stateParams.uuid && $stateParams.uuid !== "new") {
-									return boilerplateFactory.get({ id: $stateParams.uuid }).$promise;
-								} else {
-									return {};
-								}
-							}],
-						},
-						ncyBreadcrumb: {
-							label: "{{breadcrumb}}"
-						},
-						views: {
-							"": {
-								templateUrl: "/app/core/resource/views/resource.html",
-								controller: "boilerplateDetailController"
-							},
-							"form@pelorus.wcm-boilerplate.edit": {
-								templateUrl: moduleFolder + "views/detail.html"
+								controller: "arcgisSNAOverviewController"
 							}
 						}
 					});

@@ -1,8 +1,6 @@
-"use strict";
-
 (function(angular) {
-	angular.module("wcm-boilerplate_0.0.1")
-		.provider("boilerplateConfig", [
+	angular.module("wcm-arcgis-sna_0.0.1")
+		.provider("arcgisSNAConfig", [
 
 			"MODULE_ENV_CONFIG",
 

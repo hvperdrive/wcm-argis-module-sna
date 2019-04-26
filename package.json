@@ -1,7 +1,7 @@
 {
-  "name": "@wcm/boilerplate",
+  "name": "@wcm/argis-sna-module",
   "version": "0.0.1",
-  "description": "Boilerplate module",
+  "description": "Arcgis SNA syncing module",
   "main": "app",
   "scripts": {
     "test": "NODE_ENV=test APP=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha"
@@ -10,7 +10,8 @@
     "@wcm:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
   },
   "keywords": [
-    "Boilerplate",
+    "Arcgis",
+    "SNA",
     "WCM",
     "Pelorus",
     "module",
@@ -20,12 +21,12 @@
     "angularDirPath": "public/app/",
     "cssDirPath": "public/styles/",
     "moduleConfig": {
-      "angularModule": "wcm-boilerplate",
-      "translationKey": "Boilerplate",
-      "operationType": "boilerplate",
+      "angularModule": "wcm-arcgis-sna",
+      "translationKey": "Arcgis sync",
+      "operationType": "arcgis-sna-sync",
       "icon": "ban",
       "type": "system",
-      "machineName": "boilerplate",
+      "machineName": "arcgis-sna-sync",
       "navigationItem": true,
       "authentication": {
         "requiresLogin": true
