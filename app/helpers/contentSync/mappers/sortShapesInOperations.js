@@ -69,6 +69,5 @@ module.exports = (content, arcgisFeatures) => {
 		create: {},
 		update: {},
 		remove: {},
-	})
-
+	});
 }
