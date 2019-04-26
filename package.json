@@ -34,6 +34,28 @@
     },
     "variables": [
       {
+        "group": "Credentials",
+        "key": "credentials",
+        "enabled": true,
+        "accordion": true,
+        "variables": [
+          {
+            "label": "Service account",
+            "key": "account",
+            "value": "",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Password",
+            "key": "password",
+            "value": "",
+            "type": "password",
+            "required": true
+          }
+        ]
+      },
+      {
         "group": "Content types",
         "key": "contentTypes",
         "enabled": true,

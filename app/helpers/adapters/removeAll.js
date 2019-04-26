@@ -5,6 +5,7 @@ const variablesHelper = require("../variables");
 
 module.exports = (type) => {
 	const layerUri = path(["layers", "variables", type])(variablesHelper.get());
+	const credentials = path(["credentials", "variables"])(variablesHelper.get());
 
 	return request({
 		baseUrl: layerUri,
@@ -14,8 +15,9 @@ module.exports = (type) => {
 			where: "1=1",
 			f: "json",
 		},
-		headers: {
-			Authorization: "Basic SUNBXGV4MDI1Mzg6RGlzdHJpY3QwMg==",
+		auth: {
+			user: credentials.account,
+			pass: credentials.password
 		},
 		json: true
 	})
