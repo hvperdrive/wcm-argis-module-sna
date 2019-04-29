@@ -1,24 +1,8 @@
-const request = require("request-promise");
-const { path } = require("ramda");
-
-const variablesHelper = require("../variables");
+const remove = require("./remove");
+const create = require("./create");
 
 module.exports = (type, features) => {
-	const layerUri = path(["layers", "variables", type])(variablesHelper.get());
-	const credentials = path(["credentials", "variables"])(variablesHelper.get());
+    const objectIds = features.map((feature) => feature.attributes.OBJECTID);
 
-	return request({
-		baseUrl: layerUri,
-		uri: 'updateFeatures',
-		method: "POST",
-		formData: {
-			features: JSON.stringify(features),
-			f: "json",
-		},
-		auth: {
-			user: credentials.account,
-			pass: credentials.password
-		},
-		json: true
-	})
-}
+    return remove(type, objectIds).then(() => create(type, features));
+};

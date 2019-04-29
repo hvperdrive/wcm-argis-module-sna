@@ -8,7 +8,16 @@ const {
 	pathOr,
 	equals,
 	differenceWith,
-	innerJoin,
+    reduce,
+    ifElse,
+    identity,
+    always,
+    set,
+    lensPath,
+    find,
+    concat,
+    tap,
+    innerJoin,
 } = require("ramda");
 
 const getShapes = require("./getShapes");
@@ -32,6 +41,20 @@ const getContentFId = (feature) => compose(
 )(feature);
 const getArcgisFId = (feature) => path(["properties", "F_id"])(feature);
 
+// const innerJoinMap = curry((pred, map, listA, listB) => reduce((acc, listAItem) =>
+//     compose(
+//         concat(acc),
+//         tap((val) => console.log(JSON.stringify(val))),
+//         ifElse(
+//             identity,
+//             (listBItem) => [map(listAItem, listBItem)],
+//             always([])
+//         ),
+//         find((listBItem) => pred(listAItem, listBItem) && { listAItem, listBItem })
+//     )(listB)
+//     ,[]
+// )(listA));
+
 const sortByCrud = (type, content, features) => {
 	// Map and filter the content shapes to features of a specific type
 	const contentFeatures = compose(
@@ -46,11 +69,21 @@ const sortByCrud = (type, content, features) => {
 		getShapes
 	)(content);
 
-	const comp = (contentFeature, feature) => getContentFId(contentFeature) === getArcgisFId(feature);
+    const comp = (contentFeature, feature) => getContentFId(contentFeature) === getArcgisFId(feature);
+    // const updateMapper = (contentFeature, feature) => compose(
+    //     set(
+    //         lensPath(["attributes", "OBJECTID"]),
+    //         path(["properties", "OBJECTID"])(feature)
+    //     ),
+    //     set(
+    //         lensPath(["id"]),
+    //         path(["id"])(feature)
+    //     )
+    // )(contentFeature)
 
 	return {
 		create: differenceWith((contentFeature, feature) => comp(contentFeature, feature))(contentFeatures, features),
-		update: innerJoin((feature, contentFeature) => comp(contentFeature, feature))(features, contentFeatures),
+		update: innerJoin((contentFeature, feature) => comp(contentFeature, feature))(contentFeatures, features),
 		remove: differenceWith((feature, contentFeature) => comp(contentFeature, feature))(features, contentFeatures),
 	};
 };
