@@ -6,7 +6,11 @@ const responseParser = require("./helpers/responseParser");
 
 module.exports = (type, features) => {
 	const layerUri = path(["layers", "variables", type])(variablesHelper.get());
-    const credentials = path(["credentials", "variables"])(variablesHelper.get());
+	const credentials = path(["credentials", "variables"])(variablesHelper.get());
+
+	if (!features.length) {
+		return Promise.resolve();
+	}
 
 	return request({
 		baseUrl: layerUri,
