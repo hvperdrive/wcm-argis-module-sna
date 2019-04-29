@@ -1,6 +1,7 @@
 const { path, set, compose, lensProp, prop } = require("ramda");
 
 const getMappedGeometry = (shape) => {
+
 	switch(shape.geometry.type) {
 		// Set polygon geometry
 		case "Polygon":

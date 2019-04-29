@@ -20,7 +20,7 @@ module.exports = (contentItem) => {
 		returnGeometry: true,
 		f: "geojson",
 		outFields: "*"
-	};
+    };
 
 	return Promise.all([
 		adapters.get({ qs: queryParams, type: "poly" }),
