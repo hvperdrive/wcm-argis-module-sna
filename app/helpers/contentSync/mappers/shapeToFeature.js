@@ -1,15 +1,18 @@
-const { path, set, compose, lensProp, prop } = require("ramda");
+const { path, set, compose, lensProp, prop, omit } = require("ramda");
 
 const getMappedGeometry = (shape) => {
-
 	switch(shape.geometry.type) {
 		// Set polygon geometry
 		case "Polygon":
-			return set(lensProp("rings"), shape.geometry.coordinates)(shape.geometry);
+			return compose(
+                omit(["coordinates", "type"]),
+                set(lensProp("rings"), shape.geometry.coordinates)
+            )(shape.geometry);
 
 		// Set point geometry
 		case "Point":
 			return compose(
+                omit(["coordinates", "type"]),
 				set(lensProp("x"), shape.geometry.coordinates[0]),
 				set(lensProp("y"), shape.geometry.coordinates[1])
 			)(shape.geometry)
@@ -20,7 +23,15 @@ const getMappedGeometry = (shape) => {
 
 module.exports = (content, shape) => ({
 	type: "Feature",
-	geometry: getMappedGeometry(shape),
+	geometry: Object.assign(
+        {},
+        {
+            spatialReference: {
+                wkid: 4326,
+            }
+        },
+        getMappedGeometry(shape)
+    ),
 	attributes: {
 		F_id: prop("uid")(shape),
 		uuid: prop("uuid")(content),
