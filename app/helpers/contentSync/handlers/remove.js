@@ -7,7 +7,7 @@ const emitters = require("../emitters");
 
 module.exports = (content) => {
 	if (!validators.content(content)) {
-		console.log(`SNA-ARCGIS-MODULE: Invalid content, skipping arcgis removeal for ${prop("_id", content)}`);
+		console.log(`SNA-ARCGIS-MODULE: Invalid content, skipping arcgis removeal for ${prop("uuid", content)}`);
 		return;
 	}
 
@@ -15,5 +15,5 @@ module.exports = (content) => {
 	return fetchers.getArcgisFeaturesByContent(content)
 		// Remove features
 		.then((operations) => emitters.remove(operations))
-		.then((result) => console.log(`SNA-ARCGIS-MODULE: features removed because of content removal (${prop("_id", content)})`) || result);
+		.then((result) => console.log(`SNA-ARCGIS-MODULE: features removed because of content removal (${prop("uuid", content)})`) || result);
 };
