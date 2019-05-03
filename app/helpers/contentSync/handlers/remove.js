@@ -1,7 +1,6 @@
 const { prop } = require("ramda");
 const validators = require("../validators");
 
-const mappers = require("../mappers");
 const fetchers = require("../fetchers");
 const emitters = require("../emitters");
 

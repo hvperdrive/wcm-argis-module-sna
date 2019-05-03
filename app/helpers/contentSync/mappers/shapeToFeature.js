@@ -6,9 +6,9 @@ const {
 	invoker,
 	ifElse,
 	length,
+	pathOr,
+	propOr,
 	curry,
-	path,
-	prop,
 	omit,
 	set,
 	gt,
@@ -44,7 +44,7 @@ const getStringWithMaxLength = curry((maxLength, p, object) => compose(
 		),
 		identity
 	),
-	path(p)
+	pathOr("", p)
 )(object));
 
 module.exports = (content, shape) => ({
@@ -59,12 +59,12 @@ module.exports = (content, shape) => ({
 		getMappedGeometry(shape)
 	),
 	attributes: {
-		F_id: prop("uid")(shape),
-		uuid: prop("uuid")(content),
+		F_id: propOr("", "uid")(shape),
+		uuid: propOr("", "uuid")(content),
 		title: getStringWithMaxLength(150, ["fields", "title", "nl"])(content),
 		intro: getStringWithMaxLength(255, ["fields", "metaDescription", "nl"])(content),
-		lastModified: path(["meta", "lastModified"])(content),
-		created: path(["meta", "created"])(content),
+		lastModified: pathOr("", ["meta", "lastModified"])(content),
+		created: pathOr("", ["meta", "created"])(content),
 		link: getStringWithMaxLength(255, ["meta", "slug", "nl"])(content),
 	}
 });

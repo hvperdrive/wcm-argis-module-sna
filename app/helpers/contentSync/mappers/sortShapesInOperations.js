@@ -8,16 +8,14 @@ const {
 	pathOr,
 	equals,
 	differenceWith,
-    reduce,
-    ifElse,
-    identity,
-    always,
-    set,
-    lensPath,
-    find,
-    concat,
-    tap,
-    innerJoin,
+	reduce,
+	ifElse,
+	identity,
+	always,
+	set,
+	lensPath,
+	find,
+	concat,
 } = require("ramda");
 
 const getShapes = require("./getShapes");
@@ -42,16 +40,16 @@ const getContentFId = (feature) => compose(
 const getArcgisFId = (feature) => path(["properties", "F_id"])(feature);
 
 const innerJoinMap = curry((pred, map, listA, listB) => reduce((acc, listAItem) =>
-    compose(
-        concat(acc),
-        ifElse(
-            identity,
-            (listBItem) => [map(listAItem, listBItem)],
-            always([])
-        ),
-        find((listBItem) => pred(listAItem, listBItem) && { listAItem, listBItem })
-    )(listB)
-    ,[]
+	compose(
+		concat(acc),
+		ifElse(
+			identity,
+			(listBItem) => [map(listAItem, listBItem)],
+			always([])
+		),
+		find((listBItem) => pred(listAItem, listBItem) && { listAItem, listBItem })
+	)(listB)
+	,[]
 )(listA));
 
 const sortByCrud = (type, content, features) => {
@@ -68,17 +66,17 @@ const sortByCrud = (type, content, features) => {
 		getShapes
 	)(content);
 
-    const comp = (contentFeature, feature) => getContentFId(contentFeature) === getArcgisFId(feature);
-    const updateMapper = (contentFeature, feature) => compose(
-        set(
-            lensPath(["attributes", "OBJECTID"]),
-            path(["properties", "OBJECTID"])(feature)
-        ),
-        set(
-            lensPath(["id"]),
-            path(["id"])(feature)
-        )
-    )(contentFeature);
+	const comp = (contentFeature, feature) => getContentFId(contentFeature) === getArcgisFId(feature);
+	const updateMapper = (contentFeature, feature) => compose(
+		set(
+			lensPath(["attributes", "OBJECTID"]),
+			path(["properties", "OBJECTID"])(feature)
+		),
+		set(
+			lensPath(["id"]),
+			path(["id"])(feature)
+		)
+	)(contentFeature);
 
 	return {
 		create: differenceWith(comp)(contentFeatures, features),

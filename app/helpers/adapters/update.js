@@ -9,7 +9,7 @@ module.exports = (type, features) => {
 
 	if (!features.length) {
 		return Promise.resolve();
-    }
+  }
 
 	return request({
 		baseUrl: layerUri,
@@ -24,5 +24,5 @@ module.exports = (type, features) => {
 			pass: credentials.password
 		},
 		json: true
-    });
+  });
 };

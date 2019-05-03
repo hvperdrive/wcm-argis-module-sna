@@ -6,7 +6,7 @@ const responseParser = require("./helpers/responseParser");
 
 module.exports = ({ qs, type }) => {
 	const pointLayerUri = path(["layers", "variables", type])(variablesHelper.get());
-    const credentials = path(["credentials", "variables"])(variablesHelper.get());
+	const credentials = path(["credentials", "variables"])(variablesHelper.get());
 
 	return request({
 		baseUrl: pointLayerUri,

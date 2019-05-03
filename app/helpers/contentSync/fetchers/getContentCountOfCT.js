@@ -6,8 +6,8 @@ module.exports = () => {
 	const ctId = path(["contentTypes", "variables", "wegenWerkenContentTypeId"])(variablesHelper.get());
 
 	return ContentModel.find({
-        "meta.contentType": ctId,
-        "meta.deleted": false,
-        "meta.published": true
-    }, { _id: 1 }).count();
+		"meta.contentType": ctId,
+		"meta.deleted": false,
+		"meta.published": true
+	}, { _id: 1 }).count();
 }
