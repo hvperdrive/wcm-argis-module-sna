@@ -13,6 +13,12 @@ module.exports = ({
 					point: "https://geoint-a.antwerpen.be/arcgis/rest/services/A_SNA/SNA_werven_pt_wgs84/FeatureServer/0/",
 					poly: "https://geoint-a.antwerpen.be/arcgis/rest/services/A_SNA/SNA_werven_poly_wgs84/FeatureServer/0/"
 				},
+			},
+			credentials: {
+				variables: {
+					account: "someAccount",
+					password: "somePass",
+				}
 			}
 		})
 	};

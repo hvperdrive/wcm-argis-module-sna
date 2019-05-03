@@ -148,7 +148,7 @@ module.exports = {
 				multiLanguage: true
 			},
 			metaTitle: { multiLanguage: true },
-			metaDescription: { multiLanguage: true },
+			metaDescription: { multiLanguage: true, nl: "metaDescriptions" },
 			startRoadworkLabel: { multiLanguage: true, nl: "Begin juni" },
 			endRoadworkLabel: { multiLanguage: true, nl: "Eind december" }
 		},

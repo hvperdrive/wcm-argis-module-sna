@@ -1,22 +1,23 @@
 const sinon = require("sinon");
 
 class ContentModel {
-	constructor() {
+	constructor(response) {
 		this.spies = {};
+		this.response = response;
+
+		this.find = this._setSpy("find");
+		this.count = this._setSpy("count", this.response);
+		this.skip = this._setSpy("skip");
+		this.limit = this._setSpy("limit");
+		this.lean = this._setSpy("lean");
+		this.exec = this._setSpy("exec", this.response);
 	}
 
-	find = this._setSpy("find");
-	count = this._setSpy("count");
-	skip = this._setSpy("skip");
-	limit = this._setSpy("limit");
-	lean = this._setSpy("lean");
-	exec = this._setSpy("exec");
-
-	_setSpy(type) {
+	_setSpy(type, response) {
 		return (...args) => {
 			this.spies[type] = sinon.spy(() => this)(...args);
 
-			return this.spies[type];
+			return response ? response : this.spies[type];
 		}
 	}
 }
