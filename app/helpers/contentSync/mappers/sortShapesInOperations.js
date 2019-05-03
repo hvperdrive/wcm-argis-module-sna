@@ -41,19 +41,18 @@ const getContentFId = (feature) => compose(
 )(feature);
 const getArcgisFId = (feature) => path(["properties", "F_id"])(feature);
 
-// const innerJoinMap = curry((pred, map, listA, listB) => reduce((acc, listAItem) =>
-//     compose(
-//         concat(acc),
-//         tap((val) => console.log(JSON.stringify(val))),
-//         ifElse(
-//             identity,
-//             (listBItem) => [map(listAItem, listBItem)],
-//             always([])
-//         ),
-//         find((listBItem) => pred(listAItem, listBItem) && { listAItem, listBItem })
-//     )(listB)
-//     ,[]
-// )(listA));
+const innerJoinMap = curry((pred, map, listA, listB) => reduce((acc, listAItem) =>
+    compose(
+        concat(acc),
+        ifElse(
+            identity,
+            (listBItem) => [map(listAItem, listBItem)],
+            always([])
+        ),
+        find((listBItem) => pred(listAItem, listBItem) && { listAItem, listBItem })
+    )(listB)
+    ,[]
+)(listA));
 
 const sortByCrud = (type, content, features) => {
 	// Map and filter the content shapes to features of a specific type
@@ -70,20 +69,20 @@ const sortByCrud = (type, content, features) => {
 	)(content);
 
     const comp = (contentFeature, feature) => getContentFId(contentFeature) === getArcgisFId(feature);
-    // const updateMapper = (contentFeature, feature) => compose(
-    //     set(
-    //         lensPath(["attributes", "OBJECTID"]),
-    //         path(["properties", "OBJECTID"])(feature)
-    //     ),
-    //     set(
-    //         lensPath(["id"]),
-    //         path(["id"])(feature)
-    //     )
-    // )(contentFeature)
+    const updateMapper = (contentFeature, feature) => compose(
+        set(
+            lensPath(["attributes", "OBJECTID"]),
+            path(["properties", "OBJECTID"])(feature)
+        ),
+        set(
+            lensPath(["id"]),
+            path(["id"])(feature)
+        )
+    )(contentFeature);
 
 	return {
-		create: differenceWith((contentFeature, feature) => comp(contentFeature, feature))(contentFeatures, features),
-		update: innerJoin((contentFeature, feature) => comp(contentFeature, feature))(contentFeatures, features),
+		create: differenceWith(comp)(contentFeatures, features),
+		update: innerJoinMap(comp, updateMapper)(contentFeatures, features),
 		remove: differenceWith((feature, contentFeature) => comp(contentFeature, feature))(features, contentFeatures),
 	};
 };

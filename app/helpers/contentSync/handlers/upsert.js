@@ -32,15 +32,15 @@ module.exports = (content) => {
                 return responses;
             })
 			.then((result) => console.log("SNA-ARCGIS-MODULE: Sync successfull") || result)
-			.catch((error) => {
-                let parsedError;
+			.catch((errors) => {
+                let parsedErrors;
 
                 try {
-                    parsedError = JSON.stringify(error);
+                    parsedErrors = JSON.stringify(errors);
                 } catch (e) {
-                    parsedError = error;
+                    parsedErrors = errors;
                 }
 
-                console.log(`SNA-ARCGIS-MODULE: Sync error for ${prop("uuid", content)}`, parsedError);
+                console.log(`SNA-ARCGIS-MODULE: Sync error for ${prop("uuid", content)}`, parsedErrors);
             })
 };
