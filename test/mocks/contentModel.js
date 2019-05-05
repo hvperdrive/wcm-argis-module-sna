@@ -14,11 +14,9 @@ class ContentModel {
 	}
 
 	_setSpy(type, response) {
-		return (...args) => {
-			this.spies[type] = sinon.spy(() => this)(...args);
+		this.spies[type] = sinon.spy(() => response ? response : this);
 
-			return response ? response : this.spies[type];
-		}
+		return this.spies[type];
 	}
 }
 
