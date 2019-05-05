@@ -50,7 +50,7 @@ describe("Adapters - get", () => {
 				.to.have.lengthOf(2);
 			expect(result.features[0]).to.be.an("object");
 			expect(result.features[0].properties).to.be.an("object");
-			expect(result.features[0].properties.F_id).to.equal(1543918360545);
+			expect(result.features[0].properties.F_id).to.equal("1543918360545");
 			expect(result.features[0].properties.uuid).to.equal("7faa0d00-bb0a-4add-bfd4-195c26ff50b2");
 		});
 	});
@@ -71,7 +71,7 @@ describe("Adapters - get", () => {
 				.to.have.lengthOf(2);
 			expect(result.features[0]).to.be.an("object");
 			expect(result.features[0].properties).to.be.an("object");
-			expect(result.features[0].properties.F_id).to.equal(1555061711181);
+			expect(result.features[0].properties.F_id).to.equal("1555061711181");
 			expect(result.features[0].properties.uuid).to.equal("7faa0d00-bb0a-4add-bfd4-195c26ff50b2");
 		});
 	});

@@ -12,7 +12,7 @@ module.exports = {
 				},
 				properties: {
 					OBJECTID: 1,
-					F_id: 1555061711181,
+					F_id: "1555061711181",
 					uuid: "7faa0d00-bb0a-4add-bfd4-195c26ff50b2",
 					title: "Kotterstraat afgesloten richting Groenendaallaan",
 					intro: "<p>Vanaf maandag 11 juni is de Kotterstraat tijdelijk afgesloten voor het verkeer vanop de Straatsburgdok Noordkaai richting Groenendaallaan.</p>\n\n<ul>\n\t<li>Doorgaand verkeer wordt omgeleid via de nieuwe doorgang ter hoogte van de oude spoorwegberm</li>\n\t<li>Verkeer vanop de Groendaallaan kan steeds door via de Kotterstraat</li>\n</ul>\n\n<p>De werken zijn tegen 23 juni afgerond.</p>\n",
@@ -30,7 +30,7 @@ module.exports = {
 				},
 				properties: {
 					OBJECTID: 1,
-					F_id: 1543918360532,
+					F_id: "1543918360532",
 					uuid: "7faa0d00-bb0a-4add-bfd4-195c26ff50b2",
 					title: "Kotterstraat afgesloten richting Groenendaallaan",
 					intro: "<p>Vanaf maandag 11 juni is de Kotterstraat tijdelijk afgesloten voor het verkeer vanop de Straatsburgdok Noordkaai richting Groenendaallaan.</p>\n\n<ul>\n\t<li>Doorgaand verkeer wordt omgeleid via de nieuwe doorgang ter hoogte van de oude spoorwegberm</li>\n\t<li>Verkeer vanop de Groendaallaan kan steeds door via de Kotterstraat</li>\n</ul>\n\n<p>De werken zijn tegen 23 juni afgerond.</p>\n",
@@ -61,7 +61,7 @@ module.exports = {
 			},
 			properties: {
 				OBJECTID: 1,
-				F_id: 1543918360545,
+				F_id: "1543918360545",
 				uuid: "7faa0d00-bb0a-4add-bfd4-195c26ff50b2",
 				title: "Kotterstraat afgesloten richting Groenendaallaan",
 				intro: "<p>Vanaf maandag 11 juni is de Kotterstraat tijdelijk afgesloten voor het verkeer vanop de Straatsburgdok Noordkaai richting Groenendaallaan.</p>\n\n<ul>\n\t<li>Doorgaand verkeer wordt omgeleid via de nieuwe doorgang ter hoogte van de oude spoorwegberm</li>\n\t<li>Verkeer vanop de Groendaallaan kan steeds door via de Kotterstraat</li>\n</ul>\n\n<p>De werken zijn tegen 23 juni afgerond.</p>\n",
@@ -85,8 +85,8 @@ module.exports = {
 				]
 			},
 			properties: {
-				OBJECTID: 1,
-				F_id: 1544801057584,
+				OBJECTID: 2,
+				F_id: "1544801057584",
 				uuid: "7faa0d00-bb0a-4add-bfd4-195c26ff50b2",
 				title: "Kotterstraat afgesloten richting Groenendaallaan",
 				intro: "<p>Vanaf maandag 11 juni is de Kotterstraat tijdelijk afgesloten voor het verkeer vanop de Straatsburgdok Noordkaai richting Groenendaallaan.</p>\n\n<ul>\n\t<li>Doorgaand verkeer wordt omgeleid via de nieuwe doorgang ter hoogte van de oude spoorwegberm</li>\n\t<li>Verkeer vanop de Groendaallaan kan steeds door via de Kotterstraat</li>\n</ul>\n\n<p>De werken zijn tegen 23 juni afgerond.</p>\n",

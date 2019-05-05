@@ -4,7 +4,12 @@ const { path } = require("ramda");
 const variablesHelper = require("../variables");
 
 module.exports = (type, features) => {
-	const layerUri = path(["variables", "layers", "variables", type])(variablesHelper.get());
+	const layerUri = path(["layers", "variables", type])(variablesHelper.get());
+	const credentials = path(["credentials", "variables"])(variablesHelper.get());
+
+	if (!features.length) {
+		return Promise.resolve();
+  }
 
 	return request({
 		baseUrl: layerUri,
@@ -14,9 +19,10 @@ module.exports = (type, features) => {
 			features: JSON.stringify(features),
 			f: "json",
 		},
-		headers: {
-			Authorization: "Basic SUNBXGV4MDI1Mzg6RGlzdHJpY3QwMg==",
+		auth: {
+			user: credentials.account,
+			pass: credentials.password
 		},
 		json: true
-	})
-}
+  });
+};

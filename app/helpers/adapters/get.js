@@ -2,17 +2,20 @@ const request = require("request-promise");
 const { path } = require("ramda");
 
 const variablesHelper = require("../variables");
+const responseParser = require("./helpers/responseParser");
 
 module.exports = ({ qs, type }) => {
-	const pointLayerUri = path(["variables", "layers", "variables", type])(variablesHelper.get());
+	const pointLayerUri = path(["layers", "variables", type])(variablesHelper.get());
+	const credentials = path(["credentials", "variables"])(variablesHelper.get());
 
 	return request({
 		baseUrl: pointLayerUri,
 		uri: "query",
 		qs: qs,
-		headers: {
-			Authorization: "Basic SUNBXGV4MDI1Mzg6RGlzdHJpY3QwMg==",
+		auth: {
+			user: credentials.account,
+			pass: credentials.password
 		},
 		json: true
-	});
+	}).then(responseParser);
 }

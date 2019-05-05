@@ -8,7 +8,14 @@ const {
 	pathOr,
 	equals,
 	differenceWith,
-	innerJoin,
+	reduce,
+	ifElse,
+	identity,
+	always,
+	set,
+	lensPath,
+	find,
+	concat,
 } = require("ramda");
 
 const getShapes = require("./getShapes");
@@ -26,7 +33,24 @@ const shapeToFeature = require("./shapeToFeature");
  * @property {Object[]} getArcgisFeaturesByContentResponse.points.remove Point features
  */
 
-const getFId = (feature) => path(["properties", "F_id"])(feature);
+const getContentFId = (feature) => compose(
+	(item) => item.toString(),
+	pathOr(-1, ["attributes", "F_id"])
+)(feature);
+const getArcgisFId = (feature) => path(["properties", "F_id"])(feature);
+
+const innerJoinMap = curry((pred, map, listA, listB) => reduce((acc, listAItem) =>
+	compose(
+		concat(acc),
+		ifElse(
+			identity,
+			(listBItem) => [map(listAItem, listBItem)],
+			always([])
+		),
+		find((listBItem) => pred(listAItem, listBItem) && { listAItem, listBItem })
+	)(listB)
+	,[]
+)(listA));
 
 const sortByCrud = (type, content, features) => {
 	// Map and filter the content shapes to features of a specific type
@@ -38,18 +62,28 @@ const sortByCrud = (type, content, features) => {
 			equals(type.slice(0, -1)), // remove 's' (points => point, polygons => polygon)
 			toLower,
 			pathOr("", ["geometry", "type"])
-		 )(shape)),
+		)(shape)),
 		getShapes
 	)(content);
 
-	const comp = (contentFeature, feature) => getFId(contentFeature) === getFId(feature);
+	const comp = (contentFeature, feature) => getContentFId(contentFeature) === getArcgisFId(feature);
+	const updateMapper = (contentFeature, feature) => compose(
+		set(
+			lensPath(["attributes", "OBJECTID"]),
+			path(["properties", "OBJECTID"])(feature)
+		),
+		set(
+			lensPath(["id"]),
+			path(["id"])(feature)
+		)
+	)(contentFeature);
 
 	return {
-		create: differenceWith((contentFeature, feature) => comp(contentFeature, feature))(contentFeatures, features),
-		update: innerJoin((feature, contentFeature) => comp(contentFeature, feature))(features, contentFeatures),
+		create: differenceWith(comp)(contentFeatures, features),
+		update: innerJoinMap(comp, updateMapper)(contentFeatures, features),
 		remove: differenceWith((feature, contentFeature) => comp(contentFeature, feature))(features, contentFeatures),
-	}
-}
+	};
+};
 
 /**
  * @function sortShapesInOperations
@@ -69,6 +103,5 @@ module.exports = (content, arcgisFeatures) => {
 		create: {},
 		update: {},
 		remove: {},
-	})
-
-}
+	});
+};

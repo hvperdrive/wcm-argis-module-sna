@@ -1,4 +1,5 @@
 module.exports = {
-	upsert: require("./create"),
-	remove: require('./remove')
+	remove: require("./remove"),
+	resync: require("./resync"),
+	upsert: require("./upsert"),
 };

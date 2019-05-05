@@ -3,7 +3,6 @@ const mockery = require("mockery");
 const nock = require("nock");
 
 const variablesHelperMock = require("../../../test/mocks/variablesHelper");
-const arcgisResponseMocks = require("../../../test/mocks/ArcgisResponses");
 
 describe("Adapters - remove", () => {
 	let remove;

@@ -1,4 +1,5 @@
-const { prop, flatten } = require("ramda");
+const Q = require("q");
+const { prop } = require("ramda");
 const validators = require("../validators");
 
 const mappers = require("../mappers");
@@ -7,7 +8,7 @@ const emitters = require("../emitters");
 
 module.exports = (content) => {
 	if (!validators.content(content)) {
-		console.log(`SNA-ARCGIS-MODULE: Invalid content, skipping arcgis sync for ${prop("_id", content)}`);
+		console.log(`SNA-ARCGIS-MODULE: Invalid content, skipping arcgis sync for ${prop("uuid", content)}`);
 		return;
 	}
 
@@ -15,11 +16,31 @@ module.exports = (content) => {
 	return fetchers.getArcgisFeaturesByContent(content)
 		// Sort existing p&p's en content shapes into appropriate actions
 		.then((arcgisFeatures) => mappers.sortShapesInOperations(content, arcgisFeatures))
-		// Exec actions
-		.then((operations) => Promise.all([
+		// Exec sync actions
+		.then((operations) => Q.allSettled([
 			emitters.remove(operations.remove),
 			emitters.update(operations.update),
 			emitters.create(operations.create),
 		]))
-		.then((result) => console.log("SNA-ARCGIS-MODULE: Sync successfull") || result);
+			.then((responses) => {
+				const errors = responses.filter((promiseResult) => promiseResult.state !== "fulfilled");
+
+				if (errors.length) {
+					throw errors;
+				}
+
+				return responses;
+			})
+			.then((result) => console.log("SNA-ARCGIS-MODULE: Sync successfull") || result)
+			.catch((errors) => {
+				let parsedErrors;
+
+				try {
+					parsedErrors = JSON.stringify(errors);
+				} catch (e) {
+					parsedErrors = errors;
+				}
+
+				console.log(`SNA-ARCGIS-MODULE: Sync error for ${prop("uuid", content)}`, parsedErrors);
+			})
 };

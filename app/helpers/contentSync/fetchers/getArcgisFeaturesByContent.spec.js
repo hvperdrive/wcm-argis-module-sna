@@ -43,7 +43,7 @@ describe("Fetchers - getArcgisFeaturesByContent", () => {
 					.to.have.lengthOf(2);
 				expect(result.points[0]).to.be.an("object");
 				expect(result.points[0].properties).to.be.an("object");
-				expect(result.points[0].properties.F_id).to.equal(1555061711181);
+				expect(result.points[0].properties.F_id).to.equal("1555061711181");
 				expect(result.points[0].properties.uuid).to.equal("7faa0d00-bb0a-4add-bfd4-195c26ff50b2");
 			});
 	});

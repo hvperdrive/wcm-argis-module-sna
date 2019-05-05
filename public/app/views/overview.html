@@ -1,10 +1,16 @@
-<div class="c-actionBar">
-	<div class="c-actionBar_inner">
-		<div class="c-buttonGroup">
-		</div>
+<div class="content--inner">
+	<h1 class="c-page-title u-margin-bottom" translate>Arcgis SNA sync</h1>
+
+	<div class="u-margin-bottom">
+		<h3 class="page-section-title h3-structure u-margin-bottom" translate>Reindex Arcgis</h3>
+		<p translate>Clear the Arcgis layers and reindex all items.</p>
 	</div>
-</div>
-<div class="content--inner members">
-	<h1 class="c-page-title" translate>Boilerplate overview</h1>
-	<d01-table source="data" config="tableConfig"></d01-table>
+
+	<div class="u-margin--bottom clearfix" data-ng-if="reindexing" style="height: 100px">
+		<loader loading-text="{{'Indexing.' | translate}}" css="['full', 'relative']"></loader>
+	</div>
+
+	<div class="c-buttonGroup">
+		<button class="c-button c-button--alpha c-button--md" data-ng-click="reindexSearch()" data-ng-disabled="reindexing">Reindex Arcgis</button>
+	</div>
 </div>

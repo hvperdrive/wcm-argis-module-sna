@@ -11,15 +11,18 @@ describe("Mappers - shapeToFeature", () => {
 
 		expect(result).to.be.an("object");
 		expect(result.type).to.equal("Feature"),
-		expect(result.geometry).to.deep.equal(shape.geometry);
-		expect(result.properties).to.be.an("object");
-		expect(result.properties).to.have.property("F_id", shape.uid);
-		expect(result.properties).to.have.property("uuid", wegenwerkenContentMock.content1.uuid);
-		expect(result.properties).to.have.property("title", wegenwerkenContentMock.content1.fields.title.nl);
-		expect(result.properties).to.have.property("intro", wegenwerkenContentMock.content1.fields.description.nl);
-		expect(result.properties).and.have.property("lastModified", wegenwerkenContentMock.content1.meta.lastModified);
-		expect(result.properties).and.have.property("created", wegenwerkenContentMock.content1.meta.created);
-		expect(result.properties).and.have.property("link", wegenwerkenContentMock.content1.meta.slug.nl);
+		expect(result.geometry).to.deep.equal({
+			...{"spatialReference": { "wkid": 4326} },
+			rings: shape.geometry.coordinates
+		});
+		expect(result.attributes).to.be.an("object");
+		expect(result.attributes).to.have.property("F_id", shape.uid);
+		expect(result.attributes).to.have.property("uuid", wegenwerkenContentMock.content1.uuid);
+		expect(result.attributes).to.have.property("title", wegenwerkenContentMock.content1.fields.title.nl);
+		expect(result.attributes).to.have.property("intro", wegenwerkenContentMock.content1.fields.metaDescription.nl);
+		expect(result.attributes).and.have.property("lastModified", wegenwerkenContentMock.content1.meta.lastModified);
+		expect(result.attributes).and.have.property("created", wegenwerkenContentMock.content1.meta.created);
+		expect(result.attributes).and.have.property("link", wegenwerkenContentMock.content1.meta.slug.nl);
 	});
 
 	it("Should map a content point shape to a feature", () => {
@@ -28,14 +31,18 @@ describe("Mappers - shapeToFeature", () => {
 
 		expect(result).to.be.an("object");
 		expect(result.type).to.equal("Feature"),
-		expect(result.geometry).to.deep.equal(shape.geometry);
-		expect(result.properties).to.be.an("object");
-		expect(result.properties).to.have.property("F_id", shape.uid);
-		expect(result.properties).to.have.property("uuid", wegenwerkenContentMock.content1.uuid);
-		expect(result.properties).to.have.property("title", wegenwerkenContentMock.content1.fields.title.nl);
-		expect(result.properties).to.have.property("intro", wegenwerkenContentMock.content1.fields.description.nl);
-		expect(result.properties).and.have.property("lastModified", wegenwerkenContentMock.content1.meta.lastModified);
-		expect(result.properties).and.have.property("created", wegenwerkenContentMock.content1.meta.created);
-		expect(result.properties).and.have.property("link", wegenwerkenContentMock.content1.meta.slug.nl);
+		expect(result.geometry).to.deep.equal({
+			...{"spatialReference": { "wkid": 4326} },
+			x: shape.geometry.coordinates[0],
+			y: shape.geometry.coordinates[1]
+		});
+		expect(result.attributes).to.be.an("object");
+		expect(result.attributes).to.have.property("F_id", shape.uid);
+		expect(result.attributes).to.have.property("uuid", wegenwerkenContentMock.content1.uuid);
+		expect(result.attributes).to.have.property("title", wegenwerkenContentMock.content1.fields.title.nl);
+		expect(result.attributes).to.have.property("intro", wegenwerkenContentMock.content1.fields.metaDescription.nl);
+		expect(result.attributes).and.have.property("lastModified", wegenwerkenContentMock.content1.meta.lastModified);
+		expect(result.attributes).and.have.property("created", wegenwerkenContentMock.content1.meta.created);
+		expect(result.attributes).and.have.property("link", wegenwerkenContentMock.content1.meta.slug.nl);
 	})
 });

@@ -13,14 +13,14 @@ const adapters = require("../../adapters");
  */
 module.exports = (contentItem) => {
 	const queryParams = {
-		where: `uuid = '${contentItem.uuid}'`,
+		where: `uuid='${contentItem.uuid}'`,
 		geometryType: "esriGeometryEnvelope",
 		spatialRel: "esriSpatialRelIntersects",
 		units: "esriSRUnit_Foot",
 		returnGeometry: true,
 		f: "geojson",
 		outFields: "*"
-	};
+    };
 
 	return Promise.all([
 		adapters.get({ qs: queryParams, type: "poly" }),

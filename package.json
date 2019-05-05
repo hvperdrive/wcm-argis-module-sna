@@ -1,66 +1,131 @@
 {
-    "name": "@wcm/boilerplate",
-    "version": "0.0.1",
-    "description": "Boilerplate module",
-    "main": "app",
-    "scripts": {
-        "test": "NODE_ENV=test APP=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha"
+  "name": "@wcm/argis-sna-module",
+  "version": "0.0.1",
+  "description": "Arcgis SNA syncing module",
+  "main": "app",
+  "scripts": {
+    "test": "NODE_ENV=test APP=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha"
+  },
+  "publishConfig": {
+    "@wcm:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
+  },
+  "keywords": [
+    "Arcgis",
+    "SNA",
+    "WCM",
+    "Pelorus",
+    "module",
+    "CMS"
+  ],
+  "wcmModule": {
+    "angularDirPath": "public/app/",
+    "cssDirPath": "public/styles/",
+    "moduleConfig": {
+      "angularModule": "wcm-arcgis-sna",
+      "translationKey": "Arcgis sync",
+      "operationType": "arcgis-sna-sync",
+      "icon": "ban",
+      "type": "system",
+      "machineName": "arcgis-sna-sync",
+      "navigationItem": true,
+      "authentication": {
+        "requiresLogin": true
+      }
     },
-    "publishConfig": {
-        "@wcm:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
-    },
-    "keywords": [
-        "Boilerplate",
-        "WCM",
-        "Pelorus",
-        "module",
-        "CMS"
-    ],
-    "wcmModule": {
-        "angularDirPath": "public/app/",
-        "cssDirPath": "public/styles/",
-        "moduleConfig": {
-            "angularModule": "wcm-boilerplate",
-            "translationKey": "Boilerplate",
-            "operationType": "boilerplate",
-            "icon": "ban",
-            "type": "system",
-            "machineName": "boilerplate",
-            "navigationItem": true,
-            "authentication": {
-                "requiresLogin": true
-            }
-        },
-        "variables": []
-    },
-    "author": "Jeroen Valcke",
-    "license": "ISC",
-    "dependencies": {
-        "@wcm/module-helper": "1.0.0",
-        "eslint": "^5.15.3",
-        "glob": "^7.1.2",
-        "mockery": "^2.1.0",
-        "nock": "^10.0.6",
-        "path": "^0.12.7",
-        "q": "^1.5.1",
-        "qs": "^6.7.0",
-        "ramda": "^0.25.0",
-        "request": "^2.88.0",
-        "request-promise": "^4.2.4",
-        "rootpath": "~0.1.2"
-    },
-    "devDependencies": {
-        "@district01/eslint-config": "1.0.0",
-        "apidoc-swagger": "git+https://github.com/JvJefke/apidoc-swagger.git",
-        "chai": "~4.1.2",
-        "gulp": "~3.9.1",
-        "gulp-angular-templatecache": "~2.0.0",
-        "gulp-apidoc": "~0.2.0",
-        "gulp-apidoc-swagger": "~0.2.2",
-        "gulp-replace": "~0.5.4",
-        "nyc": "^13.3.0",
-        "mocha": "~4.0.1",
-        "run-sequence": "~1.2.2",
-        "sinon": "~4.0.2"
-    }
+    "variables": [
+      {
+        "group": "Credentials",
+        "key": "credentials",
+        "enabled": true,
+        "accordion": true,
+        "variables": [
+          {
+            "label": "Service account",
+            "key": "account",
+            "value": "",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Password",
+            "key": "password",
+            "value": "",
+            "type": "password",
+            "required": true
+          }
+        ]
+      },
+      {
+        "group": "Content types",
+        "key": "contentTypes",
+        "enabled": true,
+        "accordion": true,
+        "variables": [
+          {
+            "label": "Wegenwerken content-type id",
+            "description": "Wegenwerken content-type id",
+            "key": "wegenWerkenContentTypeId",
+            "value": "",
+            "type": "text",
+            "required": true
+          }
+        ]
+      },
+      {
+        "group": "Arcgis layers",
+        "key": "layers",
+        "enabled": true,
+        "accordion": true,
+        "variables": [
+          {
+            "label": "Arcgis point layer uri",
+            "description": "Arcgis URI for points",
+            "key": "point",
+            "value": "",
+            "type": "text",
+            "required": true
+          },
+          {
+            "label": "Arcgis polygon layer uri",
+            "description": "Arcgis URI for polygons",
+            "key": "poly",
+            "value": "",
+            "type": "text",
+            "required": true
+          }
+        ]
+      }
+    ]
+  },
+  "author": "Jeroen Valcke",
+  "license": "ISC",
+  "dependencies": {
+    "@wcm/module-helper": "1.0.0",
+    "eslint": "^5.15.3",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "glob": "^7.1.2",
+    "mockery": "^2.1.0",
+    "nock": "^10.0.6",
+    "path": "^0.12.7",
+    "q": "^1.5.1",
+    "qs": "^6.7.0",
+    "ramda": "^0.25.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "rootpath": "~0.1.2"
+  },
+  "devDependencies": {
+    "@district01/eslint-config": "1.0.0",
+    "apidoc-swagger": "git+https://github.com/JvJefke/apidoc-swagger.git",
+    "chai": "~4.1.2",
+    "gulp": "~3.9.1",
+    "gulp-angular-templatecache": "~2.0.0",
+    "gulp-apidoc": "~0.2.0",
+    "gulp-apidoc-swagger": "~0.2.2",
+    "gulp-replace": "~0.5.4",
+    "mocha": "~4.0.1",
+    "nyc": "^13.3.0",
+    "run-sequence": "~1.2.2",
+    "sinon": "^4.0.2"
+  }
 }

@@ -1,9 +1,17 @@
-const { path } = require("ramda");
+const { pathOr, either, compose } = require("ramda");
 
 const variables = require("../../variables");
 
-module.exports = (content) => {
-	const { variables: { contentTypes: { variables: config } } } = variables.get();
+const getContentTypeId = (content) => compose(
+	(ct) => ct.toString(),
+	either(
+		pathOr("", ["meta", "contentType", "_id"]),
+		pathOr("", ["meta", "contentType"])
+	)
+)(content);
 
-	return path(["meta", "contentType", "_id"])(content) === config.wegenWerkenContentTypeId;
+module.exports = (content) => {
+	const { contentTypes: { variables: config } } = variables.get();
+
+	return getContentTypeId(content) === config.wegenWerkenContentTypeId;
 }
