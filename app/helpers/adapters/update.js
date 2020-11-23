@@ -9,7 +9,7 @@ module.exports = (type, features) => {
 
 	if (!features.length) {
 		return Promise.resolve();
-  }
+	}
 
 	return request({
 		baseUrl: layerUri,

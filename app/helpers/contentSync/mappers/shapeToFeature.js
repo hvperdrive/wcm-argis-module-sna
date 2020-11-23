@@ -13,6 +13,7 @@ const {
 	set,
 	gt,
 } = require("ramda");
+const { toJavascriptObject } = require("./toJavascriptObject");
 
 const getMappedGeometry = (shape) => {
 	switch(shape.geometry.type) {
@@ -60,7 +61,7 @@ module.exports = (content, shape) => ({
 	),
 	attributes: {
 		F_id: propOr("", "uid")(shape),
-		uuid: propOr("", "uuid")(content),
+		uuid: propOr("", "uuid")(toJavascriptObject(content)),
 		title: getStringWithMaxLength(150, ["fields", "title", "nl"])(content),
 		intro: getStringWithMaxLength(255, ["fields", "metaDescription", "nl"])(content),
 		lastModified: pathOr("", ["meta", "lastModified"])(content),
