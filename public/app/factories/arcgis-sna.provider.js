@@ -1,5 +1,5 @@
 (function(angular) {
-	angular.module("wcm-arcgis-sna_1.0.1.factories")
+	angular.module("wcm-arcgis-sna_1.1.0.factories")
 		.factory("arcgisSNAFactory", [
 
 			"$http",
