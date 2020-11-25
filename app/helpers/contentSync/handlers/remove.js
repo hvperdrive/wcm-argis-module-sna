@@ -6,7 +6,7 @@ const emitters = require("../emitters");
 
 module.exports = (content) => {
 	if (!validators.content(content)) {
-		console.log(`SNA-ARCGIS-MODULE: Invalid content, skipping arcgis removeal for ${prop("uuid", content)}`);
+		console.log(`SNA-ARCGIS-MODULE: Invalid content, skipping arcgis removal for ${prop("uuid", content)}`);
 		return;
 	}
 
