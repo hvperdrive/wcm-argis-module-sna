@@ -1,5 +1,5 @@
 (function(angular) {
-	angular.module("wcm-arcgis-sna_1.2.0.controllers")
+	angular.module("wcm-arcgis-sna_1.3.0.controllers")
 		.controller("arcgisSNAOverviewController", [
 
 			"$scope",
