@@ -80,5 +80,8 @@ module.exports = (content, shape) => ({
 		intro_de: getStringWithMaxLength(255, ["fields", "metaDescription", "de"])(content),
 		lastModified: pathOr("", ["meta", "lastModified"])(content),
 		created: pathOr("", ["meta", "created"])(content),
+		startDateRoadwork: pathOr("", ["fields", "startDateRoadwork"], content),
+		startDateRoadwork: pathOr("", ["fields", "endDateRoadwork"], content),
+		typeRoadworkSelection: pathOr("", ["field", "typeRoadworkSelection"], content),
 	}
 });
