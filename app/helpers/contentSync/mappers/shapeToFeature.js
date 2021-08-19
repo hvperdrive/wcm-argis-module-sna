@@ -81,7 +81,7 @@ module.exports = (content, shape) => ({
 		lastModified: pathOr("", ["meta", "lastModified"])(content),
 		created: pathOr("", ["meta", "created"])(content),
 		startDateRoadwork: pathOr("", ["fields", "startDateRoadwork"], content),
-		startDateRoadwork: pathOr("", ["fields", "endDateRoadwork"], content),
+		endDateRoadwork: pathOr("", ["fields", "endDateRoadwork"], content),
 		typeRoadworkSelection: pathOr("", ["field", "typeRoadworkSelection"], content),
 	}
 });
