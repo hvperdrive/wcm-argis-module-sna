@@ -1,6 +1,6 @@
 {
     "name": "@wcm/arcgis-sna-module",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Arcgis SNA syncing module",
     "main": "app",
     "scripts": {

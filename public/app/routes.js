@@ -1,5 +1,5 @@
 (function(angular) {
-	angular.module("wcm-arcgis-sna_1.4.0")
+	angular.module("wcm-arcgis-sna_1.4.1")
 		.config([
 
 			"$stateProvider",
