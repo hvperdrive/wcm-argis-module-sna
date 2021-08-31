@@ -83,5 +83,6 @@ module.exports = (content, shape) => ({
 		startDateRoadwork: pathOr("", ["fields", "startDateRoadwork"], content),
 		endDateRoadwork: pathOr("", ["fields", "endDateRoadwork"], content),
 		typeRoadworkSelection: pathOr("", ["fields", "typeRoadworkSelection"], content),
+		shapeColor: pathOr("", ["style", "color"], shape),
 	}
 });
