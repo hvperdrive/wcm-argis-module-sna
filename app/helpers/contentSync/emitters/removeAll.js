@@ -2,5 +2,6 @@ const { removeAll: removeAllAdapter } = require("../../adapters");
 
 module.exports = () => Promise.all([
 	removeAllAdapter("point"),
-	removeAllAdapter("poly")
-]).then(([points, polygons]) => ({ points, polygons }));
+	removeAllAdapter("poly"),
+	removeAllAdapter("polyline")
+]).then(([points, polygons, polylines]) => ({ points, polygons, polylines }));

@@ -1,17 +1,17 @@
 (function(angular) {
-	angular.module("wcm-arcgis-sna_1.4.3.factories", []);
-	angular.module("wcm-arcgis-sna_1.4.3.services", ["wcm-arcgis-sna_1.4.3.factories"]);
-	angular.module("wcm-arcgis-sna_1.4.3.controllers", ["wcm-arcgis-sna_1.4.3.services"]);
-	angular.module("wcm-arcgis-sna_1.4.3.directives", ["wcm-arcgis-sna_1.4.3.controllers"]);
+	angular.module("wcm-arcgis-sna_1.4.4.factories", []);
+	angular.module("wcm-arcgis-sna_1.4.4.services", ["wcm-arcgis-sna_1.4.4.factories"]);
+	angular.module("wcm-arcgis-sna_1.4.4.controllers", ["wcm-arcgis-sna_1.4.4.services"]);
+	angular.module("wcm-arcgis-sna_1.4.4.directives", ["wcm-arcgis-sna_1.4.4.controllers"]);
 
-	angular.module("wcm-arcgis-sna_1.4.3", [
+	angular.module("wcm-arcgis-sna_1.4.4", [
 
 		"pelorus.services",
 
-		"wcm-arcgis-sna_1.4.3.factories",
-		"wcm-arcgis-sna_1.4.3.services",
-		"wcm-arcgis-sna_1.4.3.controllers",
-		"wcm-arcgis-sna_1.4.3.directives"
+		"wcm-arcgis-sna_1.4.4.factories",
+		"wcm-arcgis-sna_1.4.4.services",
+		"wcm-arcgis-sna_1.4.4.controllers",
+		"wcm-arcgis-sna_1.4.4.directives"
 
 	])
 	.run([function () {

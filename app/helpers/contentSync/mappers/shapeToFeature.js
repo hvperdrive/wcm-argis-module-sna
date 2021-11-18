@@ -19,6 +19,7 @@ const { toJavascriptObject } = require("./toJavascriptObject");
 const getMappedGeometry = (shape) => {
 	switch(shape.geometry.type) {
 		// Set polygon geometry
+		case "Polyline":
 		case "Polygon":
 			return compose(
 				omit(["coordinates", "type"]),

@@ -1,6 +1,6 @@
 {
     "name": "@wcm/arcgis-sna-module",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "description": "Arcgis SNA syncing module",
     "main": "app",
     "scripts": {
@@ -89,6 +89,14 @@
                         "label": "Arcgis polygon layer uri",
                         "description": "Arcgis URI for polygons",
                         "key": "poly",
+                        "value": "",
+                        "type": "text",
+                        "required": true
+                    },
+                    {
+                        "label": "Arcgis polyline layer uri",
+                        "description": "Arcgis URI for polylines",
+                        "key": "polyline",
                         "value": "",
                         "type": "text",
                         "required": true
