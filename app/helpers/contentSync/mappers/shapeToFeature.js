@@ -28,7 +28,7 @@ const getMappedGeometry = (shape) => {
 		case "LineString":
 			return compose(
 				omit(["coordinates", "type"]),
-				set(lensProp("rings"), shape.geometry.coordinates)
+				set(lensProp("paths"), [shape.geometry.coordinates])
 			)(shape.geometry);
 
 		// Set point geometry
