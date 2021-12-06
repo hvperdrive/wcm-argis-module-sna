@@ -18,6 +18,10 @@ describe("Fetchers - getArcgisFeaturesByContent", () => {
 			.get("/arcgis/rest/services/A_SNA/SNA_werven_poly_wgs84/FeatureServer/0/query")
 			.query(true)
 			.reply(200, arcgisResponseMocks.queryPolygons);
+		lineNock = nock("https://geoint-a.antwerpen.be")
+			.get("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/query")
+			.query(true)
+			.reply(200, arcgisResponseMocks.queryLines);
 		pointNock = nock("https://geoint-a.antwerpen.be")
 			.get("/arcgis/rest/services/A_SNA/SNA_werven_pt_wgs84/FeatureServer/0/query")
 			.query(true)

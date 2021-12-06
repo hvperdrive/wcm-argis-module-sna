@@ -8,6 +8,7 @@ describe("Adapters - remove", () => {
 	let remove;
 	let pointRemoveNock;
 	let polyRemoveNock;
+	let lineRemoveNock;
 
 	before(() => {
 		mockery.enable({ warnOnUnregistered: false });
@@ -22,6 +23,7 @@ describe("Adapters - remove", () => {
 
 		polyRemoveNock.isDone();
 		pointRemoveNock.isDone();
+		lineRemoveNock.isDone();
 	});
 
 	it("Should remove point features from Arcgis", async() => {
@@ -42,6 +44,17 @@ describe("Adapters - remove", () => {
 			.reply(200, {});
 
 		const result = await remove("poly", ["id3", "id4", "id5"]);
+
+		expect(result).to.be.an("object").and.to.be.empty
+	});
+
+	it("Should remove polygon features from Arcgis", async() => {
+		lineRemoveNock = nock("https://geoint-a.antwerpen.be")
+			.post("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/deleteFeatures")
+			.query(true)
+			.reply(200, {});
+
+		const result = await remove("polyline", ["id3", "id4", "id5"]);
 
 		expect(result).to.be.an("object").and.to.be.empty
 	});

@@ -9,6 +9,7 @@ describe("Adapters - create", () => {
 	let create;
 	let pointCreateNock;
 	let polyCreateNock;
+	let lineCreateNock;
 
 	before(() => {
 		mockery.enable({ warnOnUnregistered: false });
@@ -23,6 +24,7 @@ describe("Adapters - create", () => {
 
 		polyCreateNock.isDone();
 		pointCreateNock.isDone();
+		lineCreateNock.isDone();
 	});
 
 	it("Should create point features from Arcgis", async() => {
@@ -43,6 +45,16 @@ describe("Adapters - create", () => {
 		const result = await create("poly", [{}, {}, {}]);
 
 		expect(result).to.deep.equal(arcgisResponseMocks.queryPolygons);
+	});
+
+	it("Should create polyline features from Arcgis", async() => {
+		lineCreateNock = nock("https://geoint-a.antwerpen.be")
+			.post("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/addFeatures")
+			.reply(200, arcgisResponseMocks.queryLines);
+
+		const result = await create("polyline", [{}, {}, {}]);
+
+		expect(result).to.deep.equal(arcgisResponseMocks.queryLines);
 	});
 });
 

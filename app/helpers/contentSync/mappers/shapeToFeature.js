@@ -18,9 +18,14 @@ const { toJavascriptObject } = require("./toJavascriptObject");
 
 const getMappedGeometry = (shape) => {
 	switch(shape.geometry.type) {
-		// Set polygon geometry
-		case "Polyline":
 		case "Polygon":
+			return compose(
+				omit(["coordinates", "type"]),
+				set(lensProp("rings"), shape.geometry.coordinates)
+			)(shape.geometry);
+
+		// Set polygon geometry
+		case "LineString":
 			return compose(
 				omit(["coordinates", "type"]),
 				set(lensProp("rings"), shape.geometry.coordinates)

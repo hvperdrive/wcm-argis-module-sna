@@ -11,9 +11,11 @@ describe("Handlers - remove", () => {
 
 	let pointQueryNock;
 	let polyQueryNock;
+	let lineQueryNock;
 
 	let pointRemoveNock;
 	let polyRemoveNock;
+	let lineRemoveNock;
 
 	before(() => {
 		mockery.enable({ warnOnUnregistered: false });
@@ -33,6 +35,11 @@ describe("Handlers - remove", () => {
 			.query(true)
 			.reply(200, arcgisResponseMocks.queryPolygons);
 
+		lineQueryNock = nock("https://geoint-a.antwerpen.be")
+			.get("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/query")
+			.query(true)
+			.reply(200, arcgisResponseMocks.queryLines);
+
 		pointRemoveNock = nock("https://geoint-a.antwerpen.be")
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_pt_wgs84/FeatureServer/0/deleteFeatures")
 			.query(true)
@@ -40,6 +47,11 @@ describe("Handlers - remove", () => {
 
 		polyRemoveNock = nock("https://geoint-a.antwerpen.be")
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_poly_wgs84/FeatureServer/0/deleteFeatures")
+			.query(true)
+			.reply(200, {});
+
+		lineRemoveNock = nock("https://geoint-a.antwerpen.be")
+			.post("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/deleteFeatures")
 			.query(true)
 			.reply(200, {});
 
@@ -52,9 +64,11 @@ describe("Handlers - remove", () => {
 
 		pointQueryNock.isDone();
 		polyQueryNock.isDone();
+		lineQueryNock.isDone();
 
 		pointRemoveNock.isDone();
 		polyRemoveNock.isDone();
+		lineRemoveNock.isDone();
 	});
 
 	it("Should sync arcgis features based on content & arcgis existing features", async() => {
@@ -70,6 +84,9 @@ describe("Handlers - remove", () => {
 			.to.be.an("object")
 			.and.to.be.empty;
 
+		expect(result.polylines)
+			.to.be.an("object")
+			.and.to.be.empty;
 	});
 });
 
