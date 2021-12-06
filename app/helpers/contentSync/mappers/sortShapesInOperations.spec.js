@@ -32,7 +32,7 @@ describe("Mappers - sortShapesInOperations", () => {
 			.to.have.lengthOf(4)
 		expect(result.create.polylines)
 			.to.be.an("array")
-			.to.have.lengthOf(0)
+			.to.have.lengthOf(1)
 		expect(result.create.points)
 			.to.be.an("array")
 			.to.have.lengthOf(1)

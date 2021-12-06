@@ -59,7 +59,7 @@ const sortByCrud = (type, content, features) => {
 		map(curry(shapeToFeature)(content)),
 		// filter content shapes by type (point, polygon)
 		filter((shape) => compose(
-			equals(type.slice(0, -1)), // remove 's' (points => point, polygons => polygon)
+			equals(type === "polylines" ? "linestring" : type.slice(0, -1)), // remove 's' (points => point, polygons => polygon)
 			toLower,
 			pathOr("", ["geometry", "type"])
 		)(shape)),

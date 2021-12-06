@@ -116,7 +116,20 @@ module.exports = {
 						},
 						properties: { type: "marker" },
 						type: "Feature"
-					}
+					},
+					{
+						type: "Feature",
+						properties: { type: "polyline" },
+						geometry: {
+							type: "LineString",
+							coordinates: [
+								[4.4069766998291, 51.2105398681062],
+								[4.41255569458008, 51.2147874651126]
+							],
+						},
+						style: { color: "#C3D053" },
+						uid: 1638803053718,
+					},
 				],
 				center: {
 					autoDiscover: false,
