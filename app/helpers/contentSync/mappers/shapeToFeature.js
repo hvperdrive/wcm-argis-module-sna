@@ -18,11 +18,17 @@ const { toJavascriptObject } = require("./toJavascriptObject");
 
 const getMappedGeometry = (shape) => {
 	switch(shape.geometry.type) {
-		// Set polygon geometry
 		case "Polygon":
 			return compose(
 				omit(["coordinates", "type"]),
 				set(lensProp("rings"), shape.geometry.coordinates)
+			)(shape.geometry);
+
+		// Set polygon geometry
+		case "LineString":
+			return compose(
+				omit(["coordinates", "type"]),
+				set(lensProp("paths"), [shape.geometry.coordinates])
 			)(shape.geometry);
 
 		// Set point geometry
@@ -83,5 +89,6 @@ module.exports = (content, shape) => ({
 		startDateRoadwork: pathOr("", ["fields", "startDateRoadwork"], content),
 		endDateRoadwork: pathOr("", ["fields", "endDateRoadwork"], content),
 		typeRoadworkSelection: pathOr("", ["fields", "typeRoadworkSelection"], content),
+		shapeColor: pathOr("", ["style", "color"], shape),
 	}
 });

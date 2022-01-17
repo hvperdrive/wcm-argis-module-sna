@@ -1,5 +1,5 @@
 (function(angular) {
-	angular.module("wcm-arcgis-sna_1.4.2")
+	angular.module("wcm-arcgis-sna_1.4.4")
 		.provider("arcgisSNAConfig", [
 
 			"MODULE_ENV_CONFIG",
@@ -8,7 +8,7 @@
 
 				this.API = {
 					name: MODULE_ENV_CONFIG.angularModule,
-					version: "1.4.2",
+					version: "1.4.4",
 					feDirPath: MODULE_ENV_CONFIG.feDirPath,
 					assetsDirPath: MODULE_ENV_CONFIG.assetsDirPath,
 					cssDirPath: MODULE_ENV_CONFIG.cssDirPath

@@ -24,10 +24,12 @@ module.exports = (contentItem) => {
 
 	return Promise.all([
 		adapters.get({ qs: queryParams, type: "poly" }),
+		adapters.get({ qs: queryParams, type: "polyline" }),
 		adapters.get({ qs: queryParams, type: "point" })
 	])
-	.then(([polygons, points]) => ({
+	.then(([polygons, polylines, points]) => ({
 		polygons: polygons.features,
+		polylines: polylines.features,
 		points: points.features,
 	}));
 }

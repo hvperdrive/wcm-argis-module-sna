@@ -9,6 +9,7 @@ describe("Adapters - update", () => {
 	let update;
 	let pointUpdateNock;
 	let polyUpdateNock;
+	let lineUpdateNock;
 
 	before(() => {
 		mockery.enable({ warnOnUnregistered: false });
@@ -23,6 +24,7 @@ describe("Adapters - update", () => {
 
 		polyUpdateNock.isDone();
 		pointUpdateNock.isDone();
+		lineUpdateNock.isDone();
 	});
 
 	it("Should update point features from Arcgis", async() => {
@@ -43,6 +45,16 @@ describe("Adapters - update", () => {
 		const result = await update("poly", [{}, {}, {}]);
 
 		expect(result).to.deep.equal(arcgisResponseMocks.queryPolygons);
+	});
+
+	it("Should update polyline features from Arcgis", async() => {
+		lineUpdateNock = nock("https://geoint-a.antwerpen.be")
+			.post("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/updateFeatures")
+			.reply(200, arcgisResponseMocks.queryLines);
+
+		const result = await update("polyline", [{}, {}, {}]);
+
+		expect(result).to.deep.equal(arcgisResponseMocks.queryLines);
 	});
 });
 

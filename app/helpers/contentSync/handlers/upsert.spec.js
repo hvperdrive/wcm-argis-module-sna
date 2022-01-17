@@ -11,15 +11,19 @@ describe("Handlers - upsert", () => {
 
 	let pointQueryNock;
 	let polyQueryNock;
+	let lineQueryNock;
 
 	let pointCreateNock;
 	let polyCreateNock;
+	let lineCreateNock;
 
 	let pointUpdateNock;
-	let polyUpdateeNock;
+	let polyUpdateNock;
+	let lineUpdateNock;
 
 	let pointRemoveNock;
 	let polyRemoveNock;
+	let lineRemoveNock;
 
 	before(() => {
 		mockery.enable({ warnOnUnregistered: false });
@@ -38,6 +42,11 @@ describe("Handlers - upsert", () => {
 			.query(true)
 			.reply(200, arcgisResponseMocks.queryPolygons);
 
+		lineQueryNock = nock("https://geoint-a.antwerpen.be")
+			.get("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/query")
+			.query(true)
+			.reply(200, arcgisResponseMocks.queryLines);
+
 		pointCreateNock = nock("https://geoint-a.antwerpen.be")
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_pt_wgs84/FeatureServer/0/addFeatures")
 			.reply(200, arcgisResponseMocks.queryPoints);
@@ -46,13 +55,21 @@ describe("Handlers - upsert", () => {
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_poly_wgs84/FeatureServer/0/addFeatures")
 			.reply(200, arcgisResponseMocks.queryPolygons);
 
+		lineCreateNock = nock("https://geoint-a.antwerpen.be")
+			.post("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/addFeatures")
+			.reply(200, arcgisResponseMocks.queryLines);
+
 		pointUpdateNock = nock("https://geoint-a.antwerpen.be")
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_pt_wgs84/FeatureServer/0/updateFeatures")
 			.reply(200, arcgisResponseMocks.queryPoints);
 
-		polyUpdateeNock = nock("https://geoint-a.antwerpen.be")
+		polyUpdateNock = nock("https://geoint-a.antwerpen.be")
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_poly_wgs84/FeatureServer/0/updateFeatures")
 			.reply(200, arcgisResponseMocks.queryPolygons);
+
+		lineUpdateNock = nock("https://geoint-a.antwerpen.be")
+			.post("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/updateFeatures")
+			.reply(200, arcgisResponseMocks.queryLines);
 
 		pointRemoveNock = nock("https://geoint-a.antwerpen.be")
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_pt_wgs84/FeatureServer/0/deleteFeatures")
@@ -61,6 +78,11 @@ describe("Handlers - upsert", () => {
 
 		polyRemoveNock = nock("https://geoint-a.antwerpen.be")
 			.post("/arcgis/rest/services/A_SNA/SNA_werven_poly_wgs84/FeatureServer/0/deleteFeatures")
+			.query(true)
+			.reply(200, {});
+
+		lineRemoveNock = nock("https://geoint-a.antwerpen.be")
+			.post("/arcgis/rest/services/A_SNA/SNA_werven_line_wgs84/FeatureServer/0/deleteFeatures")
 			.query(true)
 			.reply(200, {});
 
@@ -73,15 +95,19 @@ describe("Handlers - upsert", () => {
 
 		pointQueryNock.isDone();
 		polyQueryNock.isDone();
+		lineQueryNock.isDone();
 
 		polyCreateNock.isDone();
 		pointCreateNock.isDone();
+		lineCreateNock.isDone();
 
 		pointUpdateNock.isDone();
-		polyUpdateeNock.isDone();
+		polyUpdateNock.isDone();
+		lineUpdateNock.isDone();
 
 		pointRemoveNock.isDone();
 		polyRemoveNock.isDone();
+		lineRemoveNock.isDone();
 	});
 
 	it("Should sync arcgis features based on content & arcgis existing features", async() => {
@@ -90,7 +116,6 @@ describe("Handlers - upsert", () => {
 		expect(result)
 			.to.be.an("array")
 			.and.to.have.lengthOf(3);
-
 	});
 });
 
