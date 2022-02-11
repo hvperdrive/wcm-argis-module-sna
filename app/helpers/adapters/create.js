@@ -12,6 +12,21 @@ module.exports = (type, features) => {
 		return Promise.resolve();
 	}
 
+	console.log("SNA-ARCGIS-MODULE: Create feature", JSON.stringify({
+		baseUrl: layerUri,
+		uri: 'addFeatures',
+		method: "POST",
+		formData: {
+			features: JSON.stringify(features),
+			f: "json",
+		},
+		auth: {
+			user: credentials.account,
+			pass: credentials.password
+		},
+		json: true
+	}));
+
 	return request({
 		baseUrl: layerUri,
 		uri: 'addFeatures',
